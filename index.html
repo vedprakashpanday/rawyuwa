@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RawYuva - Raw, Real, Relatable</title>
+        <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary-neon: #00f3ff;
+        --secondary-neon: #ff00ea;
+        --bg-dark: #0a0a0c;
+        --bg-card: #15151a;
+      }
+
+      /* Horizontal Scroll Fix: Reset box-sizing and use 100% instead of vw */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: var(--bg-dark);
+        color: #fff;
+        overflow-x: hidden; /* Prevents horizontal scroll */
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      .brand-font {
+        font-family: "Orbitron", sans-serif;
+        text-transform: uppercase;
+      }
+
+      /* --- PRELOADER ANIMATION --- */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--bg-dark);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #loader-text {
+        font-size: 5rem;
+        font-weight: 900;
+        color: var(--primary-neon);
+        text-shadow: 0 0 30px var(--primary-neon);
+        display: none;
+        letter-spacing: 5px;
+      }
+
+      /* --- TOP HEADER --- */
+      .top-header {
+        background: #000;
+        padding: 8px 0;
+        font-size: 0.85rem;
+        border-bottom: 1px solid rgba(255, 0, 234, 0.2);
+        z-index: 10000;
+        position: relative;
+      }
+      .top-header a {
+        color: #aaa;
+        text-decoration: none;
+        transition: 0.3s;
+        margin-right: 15px;
+      }
+      .top-header a:hover {
+        color: var(--secondary-neon);
+        text-shadow: 0 0 8px var(--secondary-neon);
+      }
+
+      .social-icons-top {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .social-icons-top a {
+        margin: 0;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .social-icons-top i {
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #aaa;
+      }
+      .social-icons-top i:hover {
+        color: var(--primary-neon);
+        text-shadow: 0 0 10px var(--primary-neon);
+      }
+
+      /* --- NAVBAR --- */
+      .navbar {
+        background: transparent;
+        padding: 20px 0;
+        transition: all 0.4s ease;
+        z-index: 9999;
+        position: absolute;
+        width: 100%;
+      }
+      .navbar.scrolled {
+        position: fixed;
+        top: 0;
+        background: rgba(10, 10, 12, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        padding: 10px 0;
+      }
+      .navbar-brand {
+        font-weight: 900;
+        color: #fff !important;
+        letter-spacing: 2px;
+        font-size: 1.5rem;
+      }
+      .navbar-brand span {
+        color: var(--primary-neon);
+        text-shadow: 0 0 10px var(--primary-neon);
+      }
+      .nav-link {
+        color: #fff !important;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .nav-link:hover {
+        color: var(--primary-neon) !important;
+        text-shadow: 0 0 8px var(--primary-neon);
+      }
+      .btn-neon {
+        background: transparent;
+        color: var(--primary-neon);
+        border: 1px solid var(--primary-neon);
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        transition: 0.3s;
+        font-weight: 600;
+      }
+      .btn-neon:hover {
+        background: var(--primary-neon);
+        color: #000;
+        box-shadow: 0 0 20px var(--primary-neon);
+      }
+
+      /* ==================================================
+         HERO SECTION - COVERFLOW SLIDER
+         ================================================== */
+      .hero-section {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        background-color: #050505;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        align-items: center;
+        padding-top: 50px;
+        /* overflow: hidden; */
+      }
+      .hero-bg-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, #1a1a24 0%, #050505 70%);
+        z-index: 1;
+      }
+      .coverflowSwiper {
+        position: absolute;
+        top: 110px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        z-index: 10;
+      }
+      .coverflowSwiper .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 350px;
+        height: 450px;
+        box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.8);
+        border: 2px solid rgba(0, 243, 255, 0.3);
+        border-radius: 15px;
+      }
+      .coverflowSwiper .swiper-slide:not(.swiper-slide-active) {
+        filter: brightness(0.4) blur(2px);
+        border-color: transparent;
+      }
+
+      .hero-text {
+        position: absolute;
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: left;
+        z-index: 20;
+        pointer-events: none;
+      }
+
+      /* TYPOGRAPHY & TYPEWRITER SETUP */
+      .hero-text h1 {
+        font-size: 3.5rem;
+        letter-spacing: 4px;
+        margin-bottom: 0;
+        line-height: 1.2;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-text h1 span {
+        overflow: hidden;
+        white-space: nowrap;
+        width: max-content;
+        max-width: 0;
+        border-right: 5px solid transparent;
+        animation-duration: 7s;
+        animation-iteration-count: infinite;
+        animation-timing-function: steps(15, end);
+      }
+
+      .hero-text .raw {
+        background: linear-gradient(to bottom, #ffffff, #888888);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
+        animation-name: type-raw;
+      }
+      .hero-text .real {
+        animation-delay: 1.3s;
+        color: var(--primary-neon);
+        text-shadow:
+          0 0 5px var(--primary-neon),
+          0 0 15px var(--primary-neon),
+          0 0 30px var(--primary-neon),
+          0px 10px 20px rgba(0, 0, 0, 0.8);
+        animation-name: type-real;
+      }
+      .hero-text .relatable {
+        animation-delay: 2.6s;
+        color: var(--secondary-neon);
+        text-shadow:
+          0 0 5px var(--secondary-neon),
+          0 0 15px var(--secondary-neon),
+          0 0 30px var(--secondary-neon),
+          0px 10px 20px rgba(0, 0, 0, 0.8);
+        animation-name: type-relatable;
+      }
+
+      /* TYPEWRITER KEYFRAMES LOGIC */
+      @keyframes type-raw {
+        0% {
+          max-width: 0;
+          border-color: #fff;
+        }
+        15% {
+          max-width: 100%;
+          border-color: #fff;
+        }
+        16%,
+        95% {
+          max-width: 100%;
+          border-color: transparent;
+        }
+        100% {
+          max-width: 0;
+          border-color: transparent;
+        }
+      }
+      @keyframes type-real {
+        0%,
+        15% {
+          max-width: 0;
+          border-color: transparent;
+        }
+        16% {
+          max-width: 0;
+          border-color: var(--primary-neon);
+        }
+        30% {
+          max-width: 100%;
+          border-color: var(--primary-neon);
+        }
+        31%,
+        95% {
+          max-width: 100%;
+          border-color: transparent;
+        }
+        100% {
+          max-width: 0;
+          border-color: transparent;
+        }
+      }
+      @keyframes type-relatable {
+        0%,
+        30% {
+          max-width: 0;
+          border-color: transparent;
+        }
+        31% {
+          max-width: 0;
+          border-color: var(--secondary-neon);
+        }
+        50% {
+          max-width: 100%;
+          border-color: var(--secondary-neon);
+        }
+        51%,
+        85% {
+          max-width: 100%;
+          border-color: transparent;
+        }
+        86%,
+        88% {
+          max-width: 100%;
+          border-color: var(--secondary-neon);
+        }
+        89%,
+        95% {
+          max-width: 100%;
+          border-color: transparent;
+        }
+        100% {
+          max-width: 0;
+          border-color: transparent;
+        }
+      }
+
+      .section-heading {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      .section-heading h2 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+      }
+      .section-heading p {
+        color: #aaa;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+
+      /* --- CORE TEAM SECTION --- */
+      .team-section {
+        padding: 80px 0;
+        background: #0a0a0c;
+        width: 100%;
+      }
+      .team-card {
+        background: var(--bg-card);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition:
+          transform 0.4s ease,
+          box-shadow 0.4s ease;
+        margin-bottom: 30px;
+      }
+      .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 243, 255, 0.1);
+        border-color: rgba(0, 243, 255, 0.3);
+      }
+      .team-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 20px;
+        border: 3px solid var(--secondary-neon);
+        padding: 5px;
+      }
+      .team-name {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        color: #fff;
+      }
+      .team-role {
+        color: var(--primary-neon);
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      /* --- INSTAGRAM SECTION --- */
+      .insta-section {
+        padding: 80px 0;
+        background: #0f0f13;
+        width: 100%;
+      }
+
+      .insta-link-wrapper {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .insta-card {
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: 0.4s;
+        cursor: pointer;
+        height: 450px;
+        width: 100%;
+      }
+      .insta-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .insta-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: 0.4s;
+      }
+      .insta-card:hover .insta-overlay {
+        opacity: 1;
+      }
+      .insta-card:hover img {
+        transform: scale(1.1);
+      }
+      .insta-icon {
+        font-size: 2.5rem;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .insta-text {
+        color: var(--secondary-neon);
+        font-weight: bold;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .desktop-insta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .insta-swiper-container {
+        display: none;
+        padding-bottom: 40px;
+        overflow: hidden;
+        width: 100%;
+      }
+      .insta-swiper-container .swiper-pagination-bullet-active {
+        background: var(--primary-neon);
+      }
+      .mobileInstaSwiper .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 250px;
+        height: 300px;
+      }
+      .mobileInstaSwiper .swiper-slide:not(.swiper-slide-active) {
+        filter: brightness(0.5);
+      }
+
+      /* --- MAP SECTION --- */
+      .map-section {
+        padding: 0;
+        line-height: 0;
+        width: 100%;
+      }
+      .map-container {
+        width: 100%;
+        height: 400px;
+        filter: invert(90%) hue-rotate(180deg) brightness(80%) contrast(120%);
+      }
+
+      /* --- JOIN US FORM SECTION --- */
+      .join-section {
+        padding: 80px 0;
+        background: url("images/icon-rawyuva.jpg") center/cover fixed;
+        position: relative;
+        width: 100%;
+      }
+      .join-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 10, 12, 0.9);
+      }
+      .form-glass {
+        background: rgba(20, 20, 25, 0.6);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 0, 234, 0.3);
+        border-radius: 20px;
+        padding: 40px;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      }
+      .sleek-input {
+        background: rgba(0, 0, 0, 0.5) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        color: #fff !important;
+        padding: 12px 15px;
+        transition: 0.3s;
+        margin-bottom: 20px;
+      }
+      .sleek-input:focus {
+        border-color: var(--primary-neon);
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+      }
+      .sleek-input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+      label {
+        font-size: 0.85rem;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background: #000;
+        padding: 60px 0 20px;
+        border-top: 2px solid var(--secondary-neon);
+        width: 100%;
+      }
+      .footer-about p {
+        color: #888;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+      .footer-title {
+        color: #fff;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+      }
+
+      .footer-connect-label {
+        color: var(--primary-neon);
+        font-size: 1rem;
+        margin-top: 15px;
+        margin-bottom: 8px;
+      }
+      .footer-contact-info {
+        margin-bottom: 15px;
+      }
+      .footer-contact-info a {
+        color: #aaa;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 5px;
+        transition: 0.3s;
+        font-size: 0.9rem;
+      }
+      .footer-contact-info a:hover {
+        color: #fff;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+      }
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+      .footer-links a {
+        color: #888;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .footer-links a:hover {
+        color: var(--primary-neon);
+        padding-left: 5px;
+      }
+
+      .footer-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .footer-gallery img {
+        width: 100%;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 5px;
+        opacity: 0.7;
+        transition: 0.3s;
+      }
+      .footer-gallery img:hover {
+        opacity: 1;
+        border: 1px solid var(--primary-neon);
+      }
+
+      .footer-social a {
+        color: #aaa;
+        font-size: 1.5rem;
+        margin-right: 15px;
+        transition: 0.3s;
+      }
+      .footer-social a:hover {
+        color: var(--secondary-neon);
+      }
+
+      /* --- MODAL FIX --- */
+      /* FIX: Give modal proper high z-index and remove backdrop conflict */
+      .modal {
+        z-index: 100050 !important;
+      }
+      .modal-backdrop {
+        z-index: 100040 !important;
+      }
+      .glass-modal {
+        background: rgba(15, 15, 20, 0.95);
+        border: 1px solid var(--primary-neon);
+        border-radius: 15px;
+      }
+
+      /* ==================================================
+         RESPONSIVE MEDIA QUERIES
+         ================================================== */
+      @media (max-width: 991px) {
+        .desktop-insta-wrapper {
+          display: none;
+        }
+        .insta-swiper-container {
+          display: block;
+
+        }
+      }
+
+      @media (max-width: 768px) {
+        .swiper
+        {
+height: 400px;
+        }
+        .top-header .contact-top {
+          display: none;
+        }
+        .top-header .container {
+          justify-content: center !important;
+        }
+        .social-icons-top {
+          margin-top: 0;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .coverflowSwiper .swiper-slide {
+          width: 260px;
+          height: 360px;
+        }
+
+        .hero-text {
+          position: absolute;
+          left: 50%;
+          top: 472px;
+          bottom: 0%;
+          transform: translateX(-50%);
+          width: 100%;
+          text-align: center;
+          padding: 0 15px;
+        }
+
+        .hero-text h1 {
+          font-size: 2.2rem;
+          letter-spacing: 2px;
+          align-items: center;
+          width: fit-content;
+          margin: 0 auto;
+        }
+
+        #loader-text {
+          font-size: 2.5rem;
+          letter-spacing: 2px;
+        }
+        .form-glass {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="preloader">
+      <div id="loader-text" class="brand-font"></div>
+    </div>
+
+    <div class="top-header">
+      <div
+        class="container d-flex flex-wrap justify-content-between align-items-center"
+      >
+        <div class="contact-top">
+          <a href="mailto:rawyuwa@gmail.com"
+            ><i class="fa-regular fa-envelope me-2"></i>rawyuwa@gmail.com</a
+          >
+          <a href="tel:+919506582927"
+            ><i class="fa-solid fa-phone me-2"></i>+91 9506582927</a
+          >
+        </div>
+        <div class="social-icons-top">
+          <a href="https://www.facebook.com/share/1AwtDqiLEn/" target="_blank"
+            ><i class="fa-brands fa-facebook-f"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/raw.yuwa?igsh=MWViNm00MHVsenluMg=="
+            target="_blank"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a href="https://x.com/Rawyuwa" target="_blank"
+            ><i class="fa-brands fa-x-twitter"></i
+          ></a>
+          <a
+            href="https://chat.whatsapp.com/BTsIy7TrWcoCKyQfFlZcgV?mode=gi_t"
+            target="_blank"
+            ><i class="fa-brands fa-whatsapp"></i
+          ></a>
+          <a
+            href="https://youtube.com/@rawyuwa?si=mgzEmtMptfm_zjE4"
+            target="_blank"
+            ><i class="fa-brands fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand brand-font" href="#"
+          ><img src="images/logo.png" alt="logo RAW YUWA" style="width: 100px"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <i class="fa-solid fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-link-item">
+              <a class="nav-link mx-2" href="#">HOME</a>
+            </li>
+            <li class="nav-link-item">
+              <a class="nav-link mx-2" href="#team">TEAM</a>
+            </li>
+            <li class="nav-link-item">
+              <a class="nav-link mx-2" href="#insta">VIBE</a>
+            </li>
+            <li class="nav-link-item ms-lg-3">
+              <a
+                href="#joinus"
+                class="btn btn-neon rounded-pill px-4 py-2 text-decoration-none"
+                >Join Our Family</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero-section">
+      <div class="hero-bg-gradient"></div>
+
+      <div class="swiper coverflowSwiper">
+        <div class="swiper-wrapper">
+          <div
+            class="swiper-slide"
+            style="
+              background-image: url(&quot;images/IMG-20260309-WA0001.jpg&quot;);
+            "
+          ></div>
+          <div
+            class="swiper-slide"
+            style="
+              background-image: url(&quot;images/IMG-20260326-WA0023.jpg&quot;);
+            "
+          ></div>
+          <div
+            class="swiper-slide"
+            style="
+              background-image: url(&quot;images/IMG-20260326-WA0024.jpg&quot;);
+            "
+          ></div>
+          <div
+            class="swiper-slide"
+            style="
+              background-image: url(&quot;images/IMG-20260326-WA0025.jpg&quot;);
+            "
+          ></div>
+          <div
+            class="swiper-slide"
+            style="
+              background-image: url(&quot;images/IMG-20260326-WA0027.jpg&quot;);
+            "
+          ></div>
+          <div
+            class="swiper-slide"
+            style="
+              background-image: url(&quot;images/IMG-20260326-WA0028.jpg&quot;);
+            "
+          ></div>
+        </div>
+      </div>
+
+      <div class="hero-text">
+        <h1 class="brand-font">
+          <span class="raw">RAW.</span>
+          <span class="real">REAL.</span>
+          <span class="relatable">RELATABLE.</span>
+        </h1>
+      </div>
+    </section>
+
+    <section id="team" class="team-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2 class="brand-font">
+            Core <span style="color: var(--primary-neon)">Team</span>
+          </h2>
+          <p>The minds behind the revolution</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="team-card">
+              <img
+                src="https://loremflickr.com/300/300/boy,portrait?lock=51"
+                alt="Team Member"
+                class="team-img"
+              />
+              <h4 class="team-name brand-font">Aaryan</h4>
+              <p class="team-role">FOUNDER & CEO</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="team-card">
+              <img
+                src="https://loremflickr.com/300/300/girl,portrait?lock=52"
+                alt="Team Member"
+                class="team-img"
+              />
+              <h4 class="team-name brand-font">Riya</h4>
+              <p class="team-role">COMMUNITY HEAD</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="team-card">
+              <img
+                src="https://loremflickr.com/300/300/man,portrait?lock=53"
+                alt="Team Member"
+                class="team-img"
+              />
+              <h4 class="team-name brand-font">Kabir</h4>
+              <p class="team-role">CREATIVE DIR.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="team-card">
+              <img
+                src="https://loremflickr.com/300/300/woman,portrait?lock=54"
+                alt="Team Member"
+                class="team-img"
+              />
+              <h4 class="team-name brand-font">Sneha</h4>
+              <p class="team-role">EVENTS LEAD</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insta" class="insta-section">
+      <div class="container">
+        <div class="section-heading">
+          <h2 class="brand-font">
+            Our <span style="color: var(--secondary-neon)">Vibe</span>
+          </h2>
+          <p>Catch the latest drops from our feed</p>
+        </div>
+
+        <div class="desktop-insta-wrapper">
+          <div class="desktop-insta-grid" id="instaDesktopGrid">
+            <a
+              href="https://www.instagram.com/reel/DWULPqSE70K/?igsh=MXY0ODZqbnV2MDJyaA=="
+              target="_blank"
+              class="insta-link-wrapper"
+            >
+              <div class="insta-card">
+                <img src="images/reel 1.jpg" alt="Insta" />
+                <div class="insta-overlay">
+                  <i class="fa-brands fa-instagram insta-icon"></i
+                  ><span class="insta-text">@RawYuva</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.instagram.com/reel/DWRnIJcE2SN/?igsh=MW1yYmFkMGY0ZXhuYQ=="
+              target="_blank"
+              class="insta-link-wrapper"
+            >
+              <div class="insta-card">
+                <img src="images/IMG-20260326-WA0041.jpg" alt="Insta" />
+                <div class="insta-overlay">
+                  <i class="fa-brands fa-instagram insta-icon"></i
+                  ><span class="insta-text">@RawYuva</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.instagram.com/reel/DWPB_Xok6gO/?igsh=MW90Z2IxODZ0dG1jMA=="
+              target="_blank"
+              class="insta-link-wrapper"
+            >
+              <div class="insta-card">
+                <img src="images/IMG-20260326-WA0035.jpg" alt="Insta" />
+                <div class="insta-overlay">
+                  <i class="fa-brands fa-instagram insta-icon"></i
+                  ><span class="insta-text">@RawYuva</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.instagram.com/reel/DWHW1xDkzxq/?igsh=MWU2aHVja2J3cnNscA=="
+              target="_blank"
+              class="insta-link-wrapper"
+            >
+              <div class="insta-card">
+                <img src="images/IMG-20260326-WA0045.jpg" alt="Insta" />
+                <div class="insta-overlay">
+                  <i class="fa-brands fa-instagram insta-icon"></i
+                  ><span class="insta-text">@RawYuva</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.instagram.com/reel/DWCPt87ExMy/?igsh=MTc3c2kzbjl4d2g4"
+              target="_blank"
+              class="insta-link-wrapper"
+            >
+              <div class="insta-card">
+                <img src="images/IMG-20260326-WA0025.jpg" alt="Insta" />
+                <div class="insta-overlay">
+                  <i class="fa-brands fa-instagram insta-icon"></i
+                  ><span class="insta-text">@RawYuva</span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              href="https://www.instagram.com/reel/DV_i_18E08P/?igsh=MTlnYWFvb3VpNmJrNw=="
+              target="_blank"
+              class="insta-link-wrapper"
+            >
+              <div class="insta-card">
+                <img src="images/IMG-20260326-WA0023.jpg" alt="Insta" />
+                <div class="insta-overlay">
+                  <i class="fa-brands fa-instagram insta-icon"></i
+                  ><span class="insta-text">@RawYuva</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="text-center mt-5">
+            <button
+              id="loadMoreBtn"
+              class="btn btn-neon rounded-pill px-5 py-2"
+            >
+              View More Posts
+            </button>
+          </div>
+        </div>
+
+        <div class="insta-swiper-container">
+          <div class="swiper mobileInstaSwiper pb-4" >
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <a
+                  href="https://www.instagram.com/reel/DV_i_18E08P/?igsh=MTlnYWFvb3VpNmJrNw=="
+                  target="_blank"
+                  class="insta-link-wrapper"
+                >
+                  <div class="insta-card">
+                    <img src="images/IMG-20260326-WA0023.jpg" alt="Insta" />
+                    <div class="insta-overlay">
+                      <i class="fa-brands fa-instagram insta-icon"></i
+                      ><span class="insta-text">@RawYuva</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a
+                  href="https://www.instagram.com/reel/DWCPt87ExMy/?igsh=MTc3c2kzbjl4d2g4"
+                  target="_blank"
+                  class="insta-link-wrapper"
+                >
+                  <div class="insta-card">
+                    <img src="images/IMG-20260326-WA0025.jpg" alt="Insta" />
+                    <div class="insta-overlay">
+                      <i class="fa-brands fa-instagram insta-icon"></i
+                      ><span class="insta-text">@RawYuva</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a
+                  href="https://www.instagram.com/reel/DWHW1xDkzxq/?igsh=MWU2aHVja2J3cnNscA=="
+                  target="_blank"
+                  class="insta-link-wrapper"
+                >
+                  <div class="insta-card">
+                    <img src="images/IMG-20260326-WA0045.jpg" alt="Insta" />
+                    <div class="insta-overlay">
+                      <i class="fa-brands fa-instagram insta-icon"></i
+                      ><span class="insta-text">@RawYuva</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a
+                  href="https://www.instagram.com/reel/DWPB_Xok6gO/?igsh=MW90Z2IxODZ0dG1jMA=="
+                  target="_blank"
+                  class="insta-link-wrapper"
+                >
+                  <div class="insta-card">
+                    <img src="images/IMG-20260335.jpg" alt="Insta" />
+                    <div class="insta-overlay">
+                      <i class="fa-brands fa-instagram insta-icon"></i
+                      ><span class="insta-text">@RawYuva</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a
+                  href="https://www.instagram.com/reel/DWRnIJcE2SN/?igsh=MW1yYmFkMGY0ZXhuYQ=="
+                  target="_blank"
+                  class="insta-link-wrapper"
+                >
+                  <div class="insta-card">
+                    <img src="images/IMG-20260326-WA0041.jpg" alt="Insta" />
+                    <div class="insta-overlay">
+                      <i class="fa-brands fa-instagram insta-icon"></i
+                      ><span class="insta-text">@RawYuva</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+
+              <div class="swiper-slide">
+                <a
+                  href="https://www.instagram.com/reel/DWULPqSE70K/?igsh=MXY0ODZqbnV2MDJyaA=="
+                  target="_blank"
+                  class="insta-link-wrapper"
+                >
+                  <div class="insta-card">
+                    <img src="images/IMG-20260326-WA0042.jpg" alt="Insta" />
+                    <div class="insta-overlay">
+                      <i class="fa-brands fa-instagram insta-icon"></i
+                      ><span class="insta-text">@RawYuva</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-pagination mt-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <iframe
+        class="map-container"
+        src="https://maps.google.com/maps?q=Lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        frameborder="0"
+        style="border: 0"
+        allowfullscreen=""
+        aria-hidden="false"
+        tabindex="0"
+      ></iframe>
+    </section>
+
+    <section id="joinus" class="join-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="form-glass">
+              <div class="text-center mb-5">
+                <h2 class="brand-font">
+                  Join Our
+                  <span style="color: var(--primary-neon)">Family</span>
+                </h2>
+                <p class="text-light opacity-75">
+                  Fill out the form below to become a part of the RawYuva
+                  community.
+                </p>
+              </div>
+
+              <form id="mainJoinForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Full Name</label>
+                    <input
+                      type="text"
+                      class="form-control sleek-input"
+                      placeholder="e.g. Rahul Sharma"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label>Email Address</label>
+                    <input
+                      type="email"
+                      class="form-control sleek-input"
+                      placeholder="rahul@example.com"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label>Calling Number</label>
+                    <input
+                      type="tel"
+                      class="form-control sleek-input"
+                      placeholder="+91 XXXXX XXXXX"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label>WhatsApp Number</label>
+                    <input
+                      type="tel"
+                      class="form-control sleek-input"
+                      placeholder="+91 XXXXX XXXXX"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-4">
+                    <label>Age</label>
+                    <input
+                      type="number"
+                      class="form-control sleek-input"
+                      placeholder="e.g. 21"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <label>Gender</label>
+                    <select class="form-control sleek-input" required>
+                      <option value="" disabled selected>Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label>City</label>
+                    <input
+                      type="text"
+                      class="form-control sleek-input"
+                      placeholder="e.g. Lucknow"
+                      value="Lucknow"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-12">
+                    <label>College/University Name</label>
+                    <input
+                      type="text"
+                      class="form-control sleek-input"
+                      placeholder="Where do you study?"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-12">
+                    <label>Full Address</label>
+                    <textarea
+                      class="form-control sleek-input"
+                      rows="2"
+                      placeholder="Your residential address"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label>Instagram Link</label>
+                    <input
+                      type="url"
+                      class="form-control sleek-input"
+                      placeholder="instagram.com/yourhandle"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label>Facebook Link</label>
+                    <input
+                      type="url"
+                      class="form-control sleek-input"
+                      placeholder="facebook.com/yourhandle"
+                    />
+                  </div>
+                </div>
+
+                <div class="text-center mt-4">
+                  <button
+                    type="submit"
+                    class="btn btn-neon rounded-pill px-5 py-3 w-100 brand-font"
+                    style="font-size: 1.2rem"
+                  >
+                    SUBMIT APPLICATION
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4 footer-about">
+            <img
+              src="images/logo.png"
+              alt="Logo"
+              class="brand-font mb-3"
+              style="width: 150px"
+            />
+            <p>
+              We are a modern, futuristic community dedicated to the youth. We
+              believe in keeping things Raw, Real, and Relatable. Join us to
+              write the next chapter of our generation.
+            </p>
+
+            <h5 class="brand-font footer-connect-label">Let's Connect</h5>
+            <div class="footer-contact-info">
+              <a href="mailto:rawyuwa@gmail.com"
+                ><i class="fa-regular fa-envelope me-2"></i>rawyuwa@gmail.com</a
+              >
+              <a href="tel:+919506582927"
+                ><i class="fa-solid fa-phone me-2"></i>+91 9506582927</a
+              >
+            </div>
+
+            <div class="footer-social mt-3">
+              <a
+                href="https://www.facebook.com/share/1AwtDqiLEn/"
+                target="_blank"
+                ><i class="fa-brands fa-facebook-f"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/raw.yuwa?igsh=MWViNm00MHVsenluMg=="
+                target="_blank"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="https://x.com/Rawyuwa" target="_blank"
+                ><i class="fa-brands fa-x-twitter"></i
+              ></a>
+              <a
+                href="https://chat.whatsapp.com/BTsIy7TrWcoCKyQfFlZcgV?mode=gi_t"
+                target="_blank"
+                ><i class="fa-brands fa-whatsapp"></i
+              ></a>
+              <a
+                href="https://youtube.com/@rawyuwa?si=mgzEmtMptfm_zjE4"
+                target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mb-4 offset-lg-1">
+            <h4 class="brand-font footer-title">Quick Links</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fa-solid fa-angle-right me-2"></i> Home</a
+                >
+              </li>
+              <li>
+                <a href="#team"
+                  ><i class="fa-solid fa-angle-right me-2"></i> Core Team</a
+                >
+              </li>
+              <li>
+                <a href="#insta"
+                  ><i class="fa-solid fa-angle-right me-2"></i> Our Vibe</a
+                >
+              </li>
+              <li>
+                <a href="#joinus"
+                  ><i class="fa-solid fa-angle-right me-2"></i> Join Family</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa-solid fa-angle-right me-2"></i> Privacy
+                  Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-12 mb-4">
+            <h4 class="brand-font footer-title">Moments</h4>
+            <div class="footer-gallery">
+              <img
+                src="https://loremflickr.com/200/200/party?lock=81"
+                alt="gallery"
+              />
+              <img
+                src="https://loremflickr.com/200/200/party?lock=82"
+                alt="gallery"
+              />
+              <img
+                src="https://loremflickr.com/200/200/party?lock=83"
+                alt="gallery"
+              />
+              <img
+                src="https://loremflickr.com/200/200/party?lock=84"
+                alt="gallery"
+              />
+              <img
+                src="https://loremflickr.com/200/200/party?lock=85"
+                alt="gallery"
+              />
+              <img
+                src="https://loremflickr.com/200/200/party?lock=86"
+                alt="gallery"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row border-top border-dark mt-4 pt-3">
+          <div class="col-12 text-center text-secondary small">
+            © 2026 RawYuva Family. Designed & Developed By Ved Prakash Pandey.
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal fade" id="autoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content glass-modal text-center text-white p-4">
+          <button
+            type="button"
+            class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <h2 class="brand-font mt-3 mb-2">
+            Welcome to <br /><span style="color: var(--primary-neon)"
+              >RawYuva</span
+            >
+          </h2>
+          <p class="text-white mb-4">
+            Are you ready to join the ultimate youth revolution?
+          </p>
+          <button
+            type="button"
+            class="btn btn-neon rounded-pill px-4 py-2 mx-auto"
+            data-bs-dismiss="modal"
+            onclick="
+              document
+                .getElementById('joinus')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            Join Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // ==========================================
+        // 1. PRELOADER & AUTO MODAL LOGIC
+        // ==========================================
+        $("body").css("overflow", "hidden");
+
+        const words = ["RawYuva", "RAW.", "REAL.", "RELATABLE."];
+        let i = 0;
+        const $loaderText = $("#loader-text");
+
+        function showNextWord() {
+          if (i < words.length) {
+            $loaderText
+              .text(words[i])
+              .fadeIn(300)
+              .delay(600)
+              .fadeOut(300, showNextWord);
+            i++;
+          } else {
+            $("#preloader").fadeOut(800, function () {
+              $("body").css("overflow", "auto");
+              setTimeout(() => {
+                // FIXED: Initialize and show modal correctly
+                var myModal = new bootstrap.Modal(
+                  document.getElementById("autoModal"),
+                  {
+                    keyboard: false,
+                  },
+                );
+                myModal.show();
+              }, 1500);
+            });
+          }
+        }
+        showNextWord();
+
+        // ==========================================
+        // 2. NAVBAR SCROLL EFFECT
+        // ==========================================
+        $(window).scroll(function () {
+          if ($(window).scrollTop() > 40) {
+            $(".navbar").addClass("scrolled");
+          } else {
+            $(".navbar").removeClass("scrolled");
+          }
+        });
+
+        // ==========================================
+        // 3. HERO COVERFLOW SWIPER
+        // ==========================================
+        const coverflowSwiper = new Swiper(".coverflowSwiper", {
+          effect: "coverflow",
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: "auto",
+          loop: true,
+          coverflowEffect: {
+            rotate: 40,
+            stretch: 0,
+            depth: 300,
+            modifier: 1,
+            slideShadows: true,
+          },
+          autoplay: { delay: 3000, disableOnInteraction: false },
+        });
+
+        // ==========================================
+        // 4. MOBILE INSTAGRAM COVERFLOW SWIPER
+        // ==========================================
+        const mobileInstaSwiper = new Swiper(".mobileInstaSwiper", {
+          effect: "coverflow",
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: "auto",
+          loop: true,
+          coverflowEffect: {
+            rotate: 30,
+            stretch: 0,
+            depth: 150,
+            modifier: 1,
+            slideShadows: true,
+          },
+          autoplay: { delay: 2500, disableOnInteraction: false },
+          pagination: {
+            el: ".mobileInstaSwiper .swiper-pagination",
+            clickable: true,
+          },
+        });
+
+        // ==========================================
+        // 5. LOAD MORE POSTS (DESKTOP DUMMY AJAX)
+        // ==========================================
+        $("#loadMoreBtn").click(function () {
+          const btn = $(this);
+          btn.text("Loading...").prop("disabled", true);
+
+          setTimeout(() => {
+            const newCards = `
+              <a href="https://www.instagram.com/reel/DVyweuCE2Pk/?igsh=MWRndjc0bnJlMDdtMQ==" target="_blank" class="insta-link-wrapper" style="display:none;">
+                <div class="insta-card">
+                  <img src="images/IMG-20260326-WA0044.jpg" alt="Insta">
+                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuva</span></div>
+                </div>
+              </a>
+              <a href="https://www.instagram.com/reel/DVwKBlQExl2/?igsh=MTB2MmNraXM5NGV1Yg==" target="_blank" class="insta-link-wrapper" style="display:none;">
+                <div class="insta-card">
+                  <img src="images/IMG-20260326-WA0028.jpg" alt="Insta">
+                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuva</span></div>
+                </div>
+              </a>
+              <a href="https://www.instagram.com/reel/DVtlWB5kxTk/?igsh=MTNtc3ZwdzJsd2hpdA==" target="_blank" class="insta-link-wrapper" style="display:none;">
+                <div class="insta-card">
+                  <img src="images/IMG-20260326-WA0024.jpg" alt="Insta">
+                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuva</span></div>
+                </div>
+              </a>
+            `;
+            $("#instaDesktopGrid").append(newCards);
+            $(".insta-link-wrapper").fadeIn(600);
+            btn.text("View More Posts").prop("disabled", false);
+          }, 1000);
+        });
+      });
+    </script>
+  </body>
+</html>
