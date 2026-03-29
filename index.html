@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RawYuva - Raw, Real, Relatable</title>
-        <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap"
       rel="stylesheet"
@@ -26,11 +26,12 @@
       :root {
         --primary-neon: #00f3ff;
         --secondary-neon: #ff00ea;
-        --bg-dark: #0a0a0c;
-        --bg-card: #15151a;
+        --bg-dark: transparent;
+        --bg-card: rgba(255, 255, 255, 0.1);
+        --btn-theme: #2eb815;
+        --btn-text: #fff;
       }
 
-      /* Horizontal Scroll Fix: Reset box-sizing and use 100% instead of vw */
       *,
       *::before,
       *::after {
@@ -40,15 +41,29 @@
       html,
       body {
         font-family: "Montserrat", sans-serif;
-        background-color: var(--bg-dark);
+        background: linear-gradient(
+          135deg,
+          rgb(253, 251, 4),
+          rgb(58, 160, 1),
+          rgb(29, 132, 15)
+        );
+        background-attachment: fixed;
         color: #fff;
-        overflow-x: hidden; /* Prevents horizontal scroll */
+        overflow-x: hidden;
         width: 100%;
         max-width: 100%;
         margin: 0;
         padding: 0;
       }
 
+      p,
+      label,
+      li,
+      a,
+      h4,
+      h2 {
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+      }
       h1,
       h2,
       h3,
@@ -66,39 +81,54 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        background-color: var(--bg-dark);
+        background: linear-gradient(
+          135deg,
+          rgb(253, 251, 4),
+          rgb(58, 160, 1),
+          rgb(29, 132, 15)
+        );
         z-index: 99999;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      #loader-text {
-        font-size: 5rem;
-        font-weight: 900;
-        color: var(--primary-neon);
-        text-shadow: 0 0 30px var(--primary-neon);
+      #loader-logo {
+        width: 180px;
         display: none;
-        letter-spacing: 5px;
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+        animation: pulseLogo 1.5s infinite;
+      }
+      @keyframes pulseLogo {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
 
       /* --- TOP HEADER --- */
       .top-header {
-        background: #000;
+        background: transparent;
         padding: 8px 0;
         font-size: 0.85rem;
-        border-bottom: 1px solid rgba(255, 0, 234, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         z-index: 10000;
         position: relative;
       }
       .top-header a {
-        color: #aaa;
+        color: #fff;
         text-decoration: none;
         transition: 0.3s;
         margin-right: 15px;
+        font-weight: 600;
       }
       .top-header a:hover {
-        color: var(--secondary-neon);
-        text-shadow: 0 0 8px var(--secondary-neon);
+        color: #fff;
+        text-shadow: 0 0 8px #fff;
       }
 
       .social-icons-top {
@@ -114,96 +144,121 @@
         justify-content: center;
       }
       .social-icons-top i {
-        font-size: 1rem;
+        font-size: 1.1rem;
         cursor: pointer;
         transition: 0.3s;
-        color: #aaa;
+        color: #fff;
       }
       .social-icons-top i:hover {
-        color: var(--primary-neon);
-        text-shadow: 0 0 10px var(--primary-neon);
+        color: #fff;
+        text-shadow: 0 0 10px #fff;
       }
 
       /* --- NAVBAR --- */
       .navbar {
         background: transparent;
-        padding: 20px 0;
+        padding: 0px 0;
         transition: all 0.4s ease;
         z-index: 9999;
         position: absolute;
         width: 100%;
+        height: 100px;
       }
       .navbar.scrolled {
         position: fixed;
         top: 0;
-        background: rgba(10, 10, 12, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(0, 243, 255, 0.2);
-        padding: 10px 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0px 0;
       }
       .navbar-brand {
         font-weight: 900;
         color: #fff !important;
         letter-spacing: 2px;
         font-size: 1.5rem;
-      }
-      .navbar-brand span {
-        color: var(--primary-neon);
-        text-shadow: 0 0 10px var(--primary-neon);
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
       }
       .nav-link {
         color: #fff !important;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 0.95rem;
         transition: 0.3s;
         text-transform: uppercase;
         letter-spacing: 1px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
       }
       .nav-link:hover {
-        color: var(--primary-neon) !important;
-        text-shadow: 0 0 8px var(--primary-neon);
+        color: #fff !important;
+        text-shadow: 0 0 8px #fff;
       }
+
       .btn-neon {
-        background: transparent;
-        color: var(--primary-neon);
-        border: 1px solid var(--primary-neon);
-        box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        background: var(--btn-theme);
+        color: var(--btn-text);
+        border: 2px solid #fff;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         transition: 0.3s;
-        font-weight: 600;
+        font-weight: 700;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
       }
       .btn-neon:hover {
-        background: var(--primary-neon);
-        color: #000;
-        box-shadow: 0 0 20px var(--primary-neon);
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--btn-theme);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        border-color: #fff;
+        text-shadow: none;
+      }
+
+      /* --- FLOATING BOTTOM RIGHT HANGING IMAGE --- */
+      .hanging-image-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 80px;
+        height: 80px;
+        z-index: 99998;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        animation: floatImg 3s ease-in-out infinite;
+      }
+      .hanging-image-btn img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
+      }
+      .hanging-image-btn:hover {
+        transform: scale(1.1);
+      }
+      @keyframes floatImg {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
       }
 
       /* ==================================================
-         HERO SECTION - COVERFLOW SLIDER
+         HERO SECTION - FULL WIDTH WITH TEXT ON TOP
          ================================================== */
       .hero-section {
         position: relative;
         height: 100vh;
         width: 100%;
-        background-color: #050505;
+        background-color: transparent;
         display: flex;
-        flex-direction: row-reverse;
         justify-content: center;
         align-items: center;
-        padding-top: 50px;
-        /* overflow: hidden; */
+        overflow: hidden;
+        margin-top: 22vh;
       }
-      .hero-bg-gradient {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at center, #1a1a24 0%, #050505 70%);
-        z-index: 1;
-      }
+
       .coverflowSwiper {
         position: absolute;
-        top: 110px;
+        top: 0;
         left: 0;
         width: 100%;
         height: 100%;
@@ -217,7 +272,7 @@
         width: 350px;
         height: 450px;
         box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.8);
-        border: 2px solid rgba(0, 243, 255, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.4);
         border-radius: 15px;
       }
       .coverflowSwiper .swiper-slide:not(.swiper-slide-active) {
@@ -235,7 +290,6 @@
         pointer-events: none;
       }
 
-      /* TYPOGRAPHY & TYPEWRITER SETUP */
       .hero-text h1 {
         font-size: 3.5rem;
         letter-spacing: 4px;
@@ -246,122 +300,70 @@
         align-items: flex-start;
       }
 
+      /* FIXED TYPEWRITER SEQUENCE LOGIC */
+      /* Sequence: RAW shows -> REAL shows -> RELATABLE shows -> All Hide -> Loop */
       .hero-text h1 span {
-        overflow: hidden;
-        white-space: nowrap;
-        width: max-content;
-        max-width: 0;
-        border-right: 5px solid transparent;
-        animation-duration: 7s;
+        opacity: 0; /* Start hidden */
+        animation-duration: 8s; /* Total loop duration */
         animation-iteration-count: infinite;
-        animation-timing-function: steps(15, end);
       }
 
       .hero-text .raw {
-        background: linear-gradient(to bottom, #ffffff, #888888);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
-        animation-name: type-raw;
+        color: #fff;
+        text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.9);
+        animation-name: seq-raw;
       }
       .hero-text .real {
-        animation-delay: 1.3s;
-        color: var(--primary-neon);
-        text-shadow:
-          0 0 5px var(--primary-neon),
-          0 0 15px var(--primary-neon),
-          0 0 30px var(--primary-neon),
-          0px 10px 20px rgba(0, 0, 0, 0.8);
-        animation-name: type-real;
+        color: #fff;
+        text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.9);
+        animation-name: seq-real;
       }
       .hero-text .relatable {
-        animation-delay: 2.6s;
-        color: var(--secondary-neon);
-        text-shadow:
-          0 0 5px var(--secondary-neon),
-          0 0 15px var(--secondary-neon),
-          0 0 30px var(--secondary-neon),
-          0px 10px 20px rgba(0, 0, 0, 0.8);
-        animation-name: type-relatable;
+        color: #fff;
+        text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.9);
+        animation-name: seq-relatable;
       }
 
-      /* TYPEWRITER KEYFRAMES LOGIC */
-      @keyframes type-raw {
+      @keyframes seq-raw {
         0% {
-          max-width: 0;
-          border-color: #fff;
+          opacity: 0;
         }
-        15% {
-          max-width: 100%;
-          border-color: #fff;
-        }
-        16%,
-        95% {
-          max-width: 100%;
-          border-color: transparent;
-        }
-        100% {
-          max-width: 0;
-          border-color: transparent;
-        }
-      }
-      @keyframes type-real {
-        0%,
-        15% {
-          max-width: 0;
-          border-color: transparent;
-        }
-        16% {
-          max-width: 0;
-          border-color: var(--primary-neon);
-        }
-        30% {
-          max-width: 100%;
-          border-color: var(--primary-neon);
-        }
-        31%,
-        95% {
-          max-width: 100%;
-          border-color: transparent;
-        }
-        100% {
-          max-width: 0;
-          border-color: transparent;
-        }
-      }
-      @keyframes type-relatable {
-        0%,
-        30% {
-          max-width: 0;
-          border-color: transparent;
-        }
-        31% {
-          max-width: 0;
-          border-color: var(--secondary-neon);
-        }
-        50% {
-          max-width: 100%;
-          border-color: var(--secondary-neon);
-        }
-        51%,
+        5%,
         85% {
-          max-width: 100%;
-          border-color: transparent;
-        }
+          opacity: 1;
+        } /* Comes first, stays till 85% */
         86%,
-        88% {
-          max-width: 100%;
-          border-color: var(--secondary-neon);
-        }
-        89%,
-        95% {
-          max-width: 100%;
-          border-color: transparent;
-        }
         100% {
-          max-width: 0;
-          border-color: transparent;
-        }
+          opacity: 0;
+        } /* Disappears with others */
+      }
+      @keyframes seq-real {
+        0%,
+        25% {
+          opacity: 0;
+        } /* Waits for RAW */
+        30%,
+        85% {
+          opacity: 1;
+        } /* Comes second, stays till 85% */
+        86%,
+        100% {
+          opacity: 0;
+        } /* Disappears with others */
+      }
+      @keyframes seq-relatable {
+        0%,
+        55% {
+          opacity: 0;
+        } /* Waits for RAW and REAL */
+        60%,
+        85% {
+          opacity: 1;
+        } /* Comes last, stays till 85% */
+        86%,
+        100% {
+          opacity: 0;
+        } /* Disappears with others */
       }
 
       .section-heading {
@@ -371,35 +373,40 @@
       .section-heading h2 {
         font-size: 3rem;
         margin-bottom: 10px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
       }
       .section-heading p {
-        color: #aaa;
+        color: #fff;
+        font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
         font-size: 0.9rem;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
       }
 
       /* --- CORE TEAM SECTION --- */
       .team-section {
-        padding: 80px 0;
-        background: #0a0a0c;
+        padding: 0px 0;
+        background: transparent;
         width: 100%;
       }
       .team-card {
         background: var(--bg-card);
+        backdrop-filter: blur(10px);
         border-radius: 15px;
         padding: 20px;
         text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         transition:
           transform 0.4s ease,
           box-shadow 0.4s ease;
         margin-bottom: 30px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
       }
       .team-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0, 243, 255, 0.1);
-        border-color: rgba(0, 243, 255, 0.3);
+        box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4);
+        border-color: #fff;
       }
       .team-img {
         width: 150px;
@@ -407,16 +414,17 @@
         border-radius: 50%;
         object-fit: cover;
         margin: 0 auto 20px;
-        border: 3px solid var(--secondary-neon);
+        border: 3px solid #fff;
         padding: 5px;
       }
       .team-name {
         font-size: 1.5rem;
         margin-bottom: 5px;
         color: #fff;
+        font-weight: 800;
       }
       .team-role {
-        color: var(--primary-neon);
+        color: #fff;
         font-size: 0.9rem;
         font-weight: 600;
         letter-spacing: 1px;
@@ -425,25 +433,24 @@
       /* --- INSTAGRAM SECTION --- */
       .insta-section {
         padding: 80px 0;
-        background: #0f0f13;
+        background: transparent;
         width: 100%;
       }
-
       .insta-link-wrapper {
         display: block;
         text-decoration: none;
         color: inherit;
       }
-
       .insta-card {
         border-radius: 10px;
         overflow: hidden;
         position: relative;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         transition: 0.4s;
         cursor: pointer;
         height: 450px;
         width: 100%;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
       }
       .insta-card img {
         width: 100%;
@@ -457,7 +464,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -477,9 +485,10 @@
         margin-bottom: 10px;
       }
       .insta-text {
-        color: var(--secondary-neon);
+        color: #fff;
         font-weight: bold;
         font-family: "Orbitron", sans-serif;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
       }
 
       .desktop-insta-grid {
@@ -487,7 +496,6 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
       }
-
       .insta-swiper-container {
         display: none;
         padding-bottom: 40px;
@@ -495,7 +503,7 @@
         width: 100%;
       }
       .insta-swiper-container .swiper-pagination-bullet-active {
-        background: var(--primary-neon);
+        background: #fff;
       }
       .mobileInstaSwiper .swiper-slide {
         background-position: center;
@@ -516,38 +524,29 @@
       .map-container {
         width: 100%;
         height: 400px;
-        filter: invert(90%) hue-rotate(180deg) brightness(80%) contrast(120%);
+        filter: hue-rotate(90deg) brightness(80%) contrast(120%);
       }
 
       /* --- JOIN US FORM SECTION --- */
       .join-section {
         padding: 80px 0;
-        background: url("images/icon-rawyuva.jpg") center/cover fixed;
+        background: transparent;
         position: relative;
         width: 100%;
       }
-      .join-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(10, 10, 12, 0.9);
-      }
       .form-glass {
-        background: rgba(20, 20, 25, 0.6);
+        background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 0, 234, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 20px;
         padding: 40px;
         position: relative;
         z-index: 2;
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
       }
       .sleek-input {
-        background: rgba(0, 0, 0, 0.5) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.2) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4);
         border-radius: 5px;
         color: #fff !important;
         padding: 12px 15px;
@@ -555,30 +554,41 @@
         margin-bottom: 20px;
       }
       .sleek-input:focus {
-        border-color: var(--primary-neon);
-        box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        border-color: #fff;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.3) !important;
       }
       .sleek-input::placeholder {
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.8);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
       }
       label {
         font-size: 0.85rem;
-        color: #aaa;
+        color: #fff;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 5px;
         display: block;
       }
 
+      /* GENDER OPTION FIX FOR VISIBILITY */
+      select.sleek-input option {
+        color: #000;
+        background-color: #fff;
+      }
+
       /* --- FOOTER --- */
       footer {
-        background: #000;
+        background: transparent;
         padding: 60px 0 20px;
-        border-top: 2px solid var(--secondary-neon);
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
         width: 100%;
+        backdrop-filter: blur(10px);
       }
       .footer-about p {
-        color: #888;
+        color: #fff;
+        font-weight: 500;
         font-size: 0.9rem;
         line-height: 1.6;
         margin-bottom: 10px;
@@ -588,10 +598,10 @@
         font-size: 1.2rem;
         margin-bottom: 20px;
         letter-spacing: 1px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
       }
-
       .footer-connect-label {
-        color: var(--primary-neon);
+        color: #fff;
         font-size: 1rem;
         margin-top: 15px;
         margin-bottom: 8px;
@@ -600,7 +610,8 @@
         margin-bottom: 15px;
       }
       .footer-contact-info a {
-        color: #aaa;
+        color: #fff;
+        font-weight: 600;
         text-decoration: none;
         display: block;
         margin-bottom: 5px;
@@ -608,9 +619,9 @@
         font-size: 0.9rem;
       }
       .footer-contact-info a:hover {
-        color: #fff;
+        color: #000;
+        text-shadow: 0 0 5px #fff;
       }
-
       .footer-links {
         list-style: none;
         padding: 0;
@@ -619,15 +630,16 @@
         margin-bottom: 10px;
       }
       .footer-links a {
-        color: #888;
+        color: #fff;
+        font-weight: 600;
         text-decoration: none;
         transition: 0.3s;
       }
       .footer-links a:hover {
-        color: var(--primary-neon);
+        color: #000;
+        text-shadow: 0 0 5px #fff;
         padding-left: 5px;
       }
-
       .footer-gallery {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -638,26 +650,26 @@
         height: 70px;
         object-fit: cover;
         border-radius: 5px;
-        opacity: 0.7;
+        opacity: 0.8;
         transition: 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.3);
       }
       .footer-gallery img:hover {
         opacity: 1;
-        border: 1px solid var(--primary-neon);
+        border-color: #fff;
       }
-
       .footer-social a {
-        color: #aaa;
+        color: #fff;
         font-size: 1.5rem;
         margin-right: 15px;
         transition: 0.3s;
       }
       .footer-social a:hover {
-        color: var(--secondary-neon);
+        color: #000;
+        text-shadow: 0 0 10px #fff;
       }
 
-      /* --- MODAL FIX --- */
-      /* FIX: Give modal proper high z-index and remove backdrop conflict */
+      /* --- MODAL --- */
       .modal {
         z-index: 100050 !important;
       }
@@ -665,8 +677,9 @@
         z-index: 100040 !important;
       }
       .glass-modal {
-        background: rgba(15, 15, 20, 0.95);
-        border: 1px solid var(--primary-neon);
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(15px);
+        border: 1px solid #fff;
         border-radius: 15px;
       }
 
@@ -674,20 +687,35 @@
          RESPONSIVE MEDIA QUERIES
          ================================================== */
       @media (max-width: 991px) {
+        .navbar {
+          background: rgba(255, 255, 255, 0.1) !important;
+          backdrop-filter: blur(15px);
+        }
+       #navbarNav {
+    /* Main Green (rgb(58, 160, 1)) par based translucent color (0.8 alpha) */
+    background: rgba(58, 160, 1, 0.8);
+    
+    /* Pehle se liked blur and glass styling intact */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly brighter border for contrast */
+    margin-top: -15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3); /* Thodi depth add karne ke liye */
+  }
+
+
+
         .desktop-insta-wrapper {
           display: none;
         }
         .insta-swiper-container {
           display: block;
-
         }
       }
 
       @media (max-width: 768px) {
-        .swiper
-        {
-height: 400px;
-        }
         .top-header .contact-top {
           display: none;
         }
@@ -700,6 +728,11 @@ height: 400px;
           width: 100%;
         }
 
+        .coverflowSwiper {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+        }
         .coverflowSwiper .swiper-slide {
           width: 260px;
           height: 360px;
@@ -707,13 +740,14 @@ height: 400px;
 
         .hero-text {
           position: absolute;
-          left: 50%;
-          top: 472px;
-          bottom: 0%;
-          transform: translateX(-50%);
+          left: 0;
+          top: 240px;
+          transform: none;
           width: 100%;
           text-align: center;
-          padding: 0 15px;
+          padding: 80px 15px 0 15px;
+          display: flex;
+          justify-content: center;
         }
 
         .hero-text h1 {
@@ -724,10 +758,6 @@ height: 400px;
           margin: 0 auto;
         }
 
-        #loader-text {
-          font-size: 2.5rem;
-          letter-spacing: 2px;
-        }
         .form-glass {
           padding: 20px;
         }
@@ -736,8 +766,16 @@ height: 400px;
   </head>
   <body>
     <div id="preloader">
-      <div id="loader-text" class="brand-font"></div>
+      <img id="loader-logo" src="images/logo.png" alt="RawYuva Logo" />
     </div>
+
+    <a
+      href="https://forms.gle/uNb41gBxXP7ArDFy9"
+      target="_blank"
+      class="hanging-image-btn"
+    >
+      <img src="images/street_dating.png" alt="Join Form" />
+    </a>
 
     <div class="top-header">
       <div
@@ -814,8 +852,6 @@ height: 400px;
     </nav>
 
     <section class="hero-section">
-      <div class="hero-bg-gradient"></div>
-
       <div class="swiper coverflowSwiper">
         <div class="swiper-wrapper">
           <div
@@ -869,9 +905,7 @@ height: 400px;
     <section id="team" class="team-section">
       <div class="container">
         <div class="section-heading">
-          <h2 class="brand-font">
-            Core <span style="color: var(--primary-neon)">Team</span>
-          </h2>
+          <h2 class="brand-font">Core Team</h2>
           <p>The minds behind the revolution</p>
         </div>
         <div class="row">
@@ -926,13 +960,11 @@ height: 400px;
     <section id="insta" class="insta-section">
       <div class="container">
         <div class="section-heading">
-          <h2 class="brand-font">
-            Our <span style="color: var(--secondary-neon)">Vibe</span>
-          </h2>
+          <h2 class="brand-font">Our Vibe</h2>
           <p>Catch the latest drops from our feed</p>
         </div>
 
-        <div class="desktop-insta-wrapper">
+        <div class="desktop-insta-wrapper" >
           <div class="desktop-insta-grid" id="instaDesktopGrid">
             <a
               href="https://www.instagram.com/reel/DWULPqSE70K/?igsh=MXY0ODZqbnV2MDJyaA=="
@@ -943,11 +975,10 @@ height: 400px;
                 <img src="images/reel 1.jpg" alt="Insta" />
                 <div class="insta-overlay">
                   <i class="fa-brands fa-instagram insta-icon"></i
-                  ><span class="insta-text">@RawYuva</span>
+                  ><span class="insta-text">@RawYuwa</span>
                 </div>
               </div>
             </a>
-
             <a
               href="https://www.instagram.com/reel/DWRnIJcE2SN/?igsh=MW1yYmFkMGY0ZXhuYQ=="
               target="_blank"
@@ -957,11 +988,10 @@ height: 400px;
                 <img src="images/IMG-20260326-WA0041.jpg" alt="Insta" />
                 <div class="insta-overlay">
                   <i class="fa-brands fa-instagram insta-icon"></i
-                  ><span class="insta-text">@RawYuva</span>
+                  ><span class="insta-text">@RawYuwa</span>
                 </div>
               </div>
             </a>
-
             <a
               href="https://www.instagram.com/reel/DWPB_Xok6gO/?igsh=MW90Z2IxODZ0dG1jMA=="
               target="_blank"
@@ -971,11 +1001,10 @@ height: 400px;
                 <img src="images/IMG-20260326-WA0035.jpg" alt="Insta" />
                 <div class="insta-overlay">
                   <i class="fa-brands fa-instagram insta-icon"></i
-                  ><span class="insta-text">@RawYuva</span>
+                  ><span class="insta-text">@RawYuwa</span>
                 </div>
               </div>
             </a>
-
             <a
               href="https://www.instagram.com/reel/DWHW1xDkzxq/?igsh=MWU2aHVja2J3cnNscA=="
               target="_blank"
@@ -985,11 +1014,10 @@ height: 400px;
                 <img src="images/IMG-20260326-WA0045.jpg" alt="Insta" />
                 <div class="insta-overlay">
                   <i class="fa-brands fa-instagram insta-icon"></i
-                  ><span class="insta-text">@RawYuva</span>
+                  ><span class="insta-text">@RawYuwa</span>
                 </div>
               </div>
             </a>
-
             <a
               href="https://www.instagram.com/reel/DWCPt87ExMy/?igsh=MTc3c2kzbjl4d2g4"
               target="_blank"
@@ -999,11 +1027,10 @@ height: 400px;
                 <img src="images/IMG-20260326-WA0025.jpg" alt="Insta" />
                 <div class="insta-overlay">
                   <i class="fa-brands fa-instagram insta-icon"></i
-                  ><span class="insta-text">@RawYuva</span>
+                  ><span class="insta-text">@RawYuwa</span>
                 </div>
               </div>
             </a>
-
             <a
               href="https://www.instagram.com/reel/DV_i_18E08P/?igsh=MTlnYWFvb3VpNmJrNw=="
               target="_blank"
@@ -1013,7 +1040,7 @@ height: 400px;
                 <img src="images/IMG-20260326-WA0023.jpg" alt="Insta" />
                 <div class="insta-overlay">
                   <i class="fa-brands fa-instagram insta-icon"></i
-                  ><span class="insta-text">@RawYuva</span>
+                  ><span class="insta-text">@RawYuwa</span>
                 </div>
               </div>
             </a>
@@ -1021,16 +1048,16 @@ height: 400px;
           <div class="text-center mt-5">
             <button
               id="loadMoreBtn"
-              class="btn btn-neon rounded-pill px-5 py-2"
+              class="btn btn-neon rounded-pill px-5 py-2 brand-font"
             >
               View More Posts
             </button>
           </div>
         </div>
 
-        <div class="insta-swiper-container">
-          <div class="swiper mobileInstaSwiper pb-4" >
-            <div class="swiper-wrapper">
+        <div class="insta-swiper-container" >
+          <div class="swiper mobileInstaSwiper pb-4">
+            <div class="swiper-wrapper" style="height: 435px;">
               <div class="swiper-slide">
                 <a
                   href="https://www.instagram.com/reel/DV_i_18E08P/?igsh=MTlnYWFvb3VpNmJrNw=="
@@ -1041,12 +1068,11 @@ height: 400px;
                     <img src="images/IMG-20260326-WA0023.jpg" alt="Insta" />
                     <div class="insta-overlay">
                       <i class="fa-brands fa-instagram insta-icon"></i
-                      ><span class="insta-text">@RawYuva</span>
+                      ><span class="insta-text">@RawYuwa</span>
                     </div>
                   </div>
                 </a>
               </div>
-
               <div class="swiper-slide">
                 <a
                   href="https://www.instagram.com/reel/DWCPt87ExMy/?igsh=MTc3c2kzbjl4d2g4"
@@ -1057,12 +1083,11 @@ height: 400px;
                     <img src="images/IMG-20260326-WA0025.jpg" alt="Insta" />
                     <div class="insta-overlay">
                       <i class="fa-brands fa-instagram insta-icon"></i
-                      ><span class="insta-text">@RawYuva</span>
+                      ><span class="insta-text">@RawYuwa</span>
                     </div>
                   </div>
                 </a>
               </div>
-
               <div class="swiper-slide">
                 <a
                   href="https://www.instagram.com/reel/DWHW1xDkzxq/?igsh=MWU2aHVja2J3cnNscA=="
@@ -1073,12 +1098,11 @@ height: 400px;
                     <img src="images/IMG-20260326-WA0045.jpg" alt="Insta" />
                     <div class="insta-overlay">
                       <i class="fa-brands fa-instagram insta-icon"></i
-                      ><span class="insta-text">@RawYuva</span>
+                      ><span class="insta-text">@RawYuwa</span>
                     </div>
                   </div>
                 </a>
               </div>
-
               <div class="swiper-slide">
                 <a
                   href="https://www.instagram.com/reel/DWPB_Xok6gO/?igsh=MW90Z2IxODZ0dG1jMA=="
@@ -1089,12 +1113,11 @@ height: 400px;
                     <img src="images/IMG-20260335.jpg" alt="Insta" />
                     <div class="insta-overlay">
                       <i class="fa-brands fa-instagram insta-icon"></i
-                      ><span class="insta-text">@RawYuva</span>
+                      ><span class="insta-text">@RawYuwa</span>
                     </div>
                   </div>
                 </a>
               </div>
-
               <div class="swiper-slide">
                 <a
                   href="https://www.instagram.com/reel/DWRnIJcE2SN/?igsh=MW1yYmFkMGY0ZXhuYQ=="
@@ -1105,12 +1128,11 @@ height: 400px;
                     <img src="images/IMG-20260326-WA0041.jpg" alt="Insta" />
                     <div class="insta-overlay">
                       <i class="fa-brands fa-instagram insta-icon"></i
-                      ><span class="insta-text">@RawYuva</span>
+                      ><span class="insta-text">@RawYuwa</span>
                     </div>
                   </div>
                 </a>
               </div>
-
               <div class="swiper-slide">
                 <a
                   href="https://www.instagram.com/reel/DWULPqSE70K/?igsh=MXY0ODZqbnV2MDJyaA=="
@@ -1121,7 +1143,7 @@ height: 400px;
                     <img src="images/IMG-20260326-WA0042.jpg" alt="Insta" />
                     <div class="insta-overlay">
                       <i class="fa-brands fa-instagram insta-icon"></i
-                      ><span class="insta-text">@RawYuva</span>
+                      ><span class="insta-text">@RawYuwa</span>
                     </div>
                   </div>
                 </a>
@@ -1151,11 +1173,8 @@ height: 400px;
           <div class="col-lg-10">
             <div class="form-glass">
               <div class="text-center mb-5">
-                <h2 class="brand-font">
-                  Join Our
-                  <span style="color: var(--primary-neon)">Family</span>
-                </h2>
-                <p class="text-light opacity-75">
+                <h2 class="brand-font">Join Our Family</h2>
+                <p class="text-light font-weight-bold">
                   Fill out the form below to become a part of the RawYuva
                   community.
                 </p>
@@ -1271,10 +1290,10 @@ height: 400px;
                 <div class="text-center mt-4">
                   <button
                     type="submit"
-                    class="btn btn-neon rounded-pill px-5 py-3 w-100 brand-font"
+                    class="btn btn-neon rounded-pill px-5 py-1 w-100 brand-font"
                     style="font-size: 1.2rem"
                   >
-                    SUBMIT APPLICATION
+                    Join Now
                   </button>
                 </div>
               </form>
@@ -1400,8 +1419,11 @@ height: 400px;
           </div>
         </div>
 
-        <div class="row border-top border-dark mt-4 pt-3">
-          <div class="col-12 text-center text-secondary small">
+        <div
+          class="row border-top mt-4 pt-3"
+          style="border-color: rgba(255, 255, 255, 0.2) !important"
+        >
+          <div class="col-12 text-center text-light small">
             © 2026 RawYuva Family. Designed & Developed By Ved Prakash Pandey.
           </div>
         </div>
@@ -1418,25 +1440,17 @@ height: 400px;
             aria-label="Close"
           ></button>
           <h2 class="brand-font mt-3 mb-2">
-            Welcome to <br /><span style="color: var(--primary-neon)"
-              >RawYuva</span
-            >
+            Welcome to <br /><span style="color: #fff">RawYuwa</span>
           </h2>
           <p class="text-white mb-4">
             Are you ready to join the ultimate youth revolution?
           </p>
-          <button
-            type="button"
-            class="btn btn-neon rounded-pill px-4 py-2 mx-auto"
+          <a
+            href="#joinus"
+            class="btn btn-neon rounded-pill px-4 py-2 mx-auto text-decoration-none brand-font"
             data-bs-dismiss="modal"
-            onclick="
-              document
-                .getElementById('joinus')
-                .scrollIntoView({ behavior: 'smooth' })
-            "
+            >Join Now</a
           >
-            Join Now
-          </button>
         </div>
       </div>
     </div>
@@ -1448,39 +1462,25 @@ height: 400px;
     <script>
       $(document).ready(function () {
         // ==========================================
-        // 1. PRELOADER & AUTO MODAL LOGIC
+        // 1. PRELOADER LOGIC (NO TEXT, ONLY LOGO)
         // ==========================================
         $("body").css("overflow", "hidden");
 
-        const words = ["RawYuva", "RAW.", "REAL.", "RELATABLE."];
-        let i = 0;
-        const $loaderText = $("#loader-text");
-
-        function showNextWord() {
-          if (i < words.length) {
-            $loaderText
-              .text(words[i])
-              .fadeIn(300)
-              .delay(600)
-              .fadeOut(300, showNextWord);
-            i++;
-          } else {
+        $("#loader-logo")
+          .fadeIn(800)
+          .delay(1200)
+          .fadeOut(800, function () {
             $("#preloader").fadeOut(800, function () {
               $("body").css("overflow", "auto");
               setTimeout(() => {
-                // FIXED: Initialize and show modal correctly
                 var myModal = new bootstrap.Modal(
                   document.getElementById("autoModal"),
-                  {
-                    keyboard: false,
-                  },
+                  { keyboard: false },
                 );
                 myModal.show();
               }, 1500);
             });
-          }
-        }
-        showNextWord();
+          });
 
         // ==========================================
         // 2. NAVBAR SCROLL EFFECT
@@ -1547,19 +1547,19 @@ height: 400px;
               <a href="https://www.instagram.com/reel/DVyweuCE2Pk/?igsh=MWRndjc0bnJlMDdtMQ==" target="_blank" class="insta-link-wrapper" style="display:none;">
                 <div class="insta-card">
                   <img src="images/IMG-20260326-WA0044.jpg" alt="Insta">
-                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuva</span></div>
+                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuwa</span></div>
                 </div>
               </a>
               <a href="https://www.instagram.com/reel/DVwKBlQExl2/?igsh=MTB2MmNraXM5NGV1Yg==" target="_blank" class="insta-link-wrapper" style="display:none;">
                 <div class="insta-card">
                   <img src="images/IMG-20260326-WA0028.jpg" alt="Insta">
-                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuva</span></div>
+                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuwa</span></div>
                 </div>
               </a>
               <a href="https://www.instagram.com/reel/DVtlWB5kxTk/?igsh=MTNtc3ZwdzJsd2hpdA==" target="_blank" class="insta-link-wrapper" style="display:none;">
                 <div class="insta-card">
                   <img src="images/IMG-20260326-WA0024.jpg" alt="Insta">
-                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuva</span></div>
+                  <div class="insta-overlay"><i class="fa-brands fa-instagram insta-icon"></i><span class="insta-text">@RawYuwa</span></div>
                 </div>
               </a>
             `;
